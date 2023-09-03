@@ -168,7 +168,7 @@ if(isset($_POST['submit'])){
             cursor:pointer;
         }
         i.active::before {
-            color: #333;
+            color: white;
             content: "\f070";
 
         }
