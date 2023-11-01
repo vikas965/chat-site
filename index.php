@@ -12,6 +12,7 @@ else{
     $user_data = mysqli_fetch_assoc($exe);
     $user_status = $user_data['cstatus'];
     $user_image = $user_data['cphoto'];
+    $user_uniq = $user_data['unique_id'];
 }
 
 ?>
@@ -44,13 +45,16 @@ else{
             align-items: center;
             justify-content: center;
             background-color: rgba(255, 255, 255, 0.399);
+            
         }
         .wrappers{
             background: rgba(248, 248, 248, 0.447);
+            
             width: 400px;
             /* border: solid 1px black; */
             box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
             border-radius: 7px;
+            background: rgb(243, 239, 235);
             /* background: rgba(11, 70, 198, 0.646); */
 
         }
@@ -65,6 +69,7 @@ else{
        
         .users{
             padding:25px 30px;
+            
         }
         .users header,.users-list a{
             display: flex;
@@ -100,9 +105,11 @@ else{
         .details span{
             text-transform:capitalize;
         }
+
+       
         header .logout{
             color: #fff;
-            background: #333;
+            background: rgb(18,140,126);
             padding: 4px 6px;
             cursor: pointer;
             font-size: 17px;
@@ -138,6 +145,8 @@ else{
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
+            background: #dcf8c6;
+            color: white;
         }
         .users .search input.active{
             pointer-events: auto;
@@ -148,16 +157,16 @@ else{
             height:40px;
             border: none;
             outline:none;
-            color: #333;
-            background: #fff;
+            color: black;
+            background: rgb(220,248,198);
             border-radius: 0 5px 5px 0;
             font-size: 17px;
             transition: all 0.2s ease;
         }
 
         .users .search button.active{
-            color: #fff;
-            background: #333;
+            color: rgb(220,248,198);
+            background: rgb(74, 72, 72);
         }
         .users .search button.active i::before{
             content: "\f00d";
@@ -166,6 +175,7 @@ else{
             margin-left: 10px;
         }
         .users-list{
+            /* background: white; */
             max-height: 350px;
             overflow-y: auto;
 
@@ -188,15 +198,23 @@ else{
         .users-list a .status-dot{
             font-size: 12px;
             color: #468869;
+            color: rgb(68, 219, 128);
         }
 
         .users-list a .content p{
             color: #67676a;
         }
 /* php offline class */
+
+
         .users-list a .status-dots{
             color: #ccc;
             font-size: 12px;
+            /* color: rgb(68, 219, 128); */
+        }
+
+        #last_msg{
+            color:rgb(57, 36, 36);
         }
 /* php offline class */
 
@@ -216,7 +234,9 @@ else{
             display: block;
             margin: 0;
             padding: 0;
-            background-color: rgba(255, 255, 255, 0.399);
+           
+            
+            background: rgb(244, 242, 239);
         }
         .wrappers{
             background: rgba(248, 248, 248, 0.447);
@@ -225,6 +245,7 @@ else{
             /* border: solid 1px black; */
             box-shadow: none;
             border-radius: 7px;
+            background: rgb(244, 242, 239);
             /* background: rgba(11, 70, 198, 0.646); */
 
         }
@@ -264,23 +285,39 @@ else{
         //   include "search.php";
           $get_users = "SELECT * FROM chatusers where cusername!='$user_name'";
           $users_exe = mysqli_query($con,$get_users);
-          if(mysqli_num_rows($users_exe)==1)
+          if(mysqli_num_rows($users_exe)==0)
           {
+            
             echo "<h3>No users available for chat</h3>";
           }else{
           while($row= mysqli_fetch_assoc($users_exe))
           {
+            $frnd_id = $row['unique_id'];
+            $latest_msg = "SELECT * FROM messages where (out_msg_id='$user_uniq' and in_msg_id='$frnd_id') or (out_msg_id='$frnd_id' and in_msg_id='$user_uniq') ORDER BY msg_id DESC LIMIT 1";
+
+            $get_msg = mysqli_query($con,$latest_msg);
+            if(mysqli_num_rows($get_msg)>0){
+                $msg_result = mysqli_fetch_assoc($get_msg);
+            
+            $last_msg = $msg_result['msg'];
+            }
+            else{
+                $last_msg = '.............';
+            }
+            
+            
+
             echo"<a href='chatarea.php?user_id={$row['unique_id']}'>
             <div class='content'>
                 <img src='users/{$row['cphoto']}'>
             
             <div class='details'>
                 <span>{$row['cusername']}</span>
-                <p>This is test message</p>
+                <p id='last_msg'>{$last_msg}</p>
             </div>
         </div>";
         
-        if($row['cstatus']=='Active'){
+        if($row['cstatus']=='Active now'){
         echo "
         <div class='status-dot'><i class='fas fa-circle'></i></div>
         </a>";}
