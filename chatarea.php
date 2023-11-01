@@ -1,6 +1,6 @@
 
 <?php
-header("Refresh: 4");
+// header("Refresh: 4");
 
 ?>
 
@@ -24,7 +24,7 @@ $u_id = $udata['unique_id'];
 
     $user_id =$_GET['user_id'];
     // echo $user_id;
-    
+   $_SESSION['user_id'] =$user_id;
     $get_user = "SELECT  * from chatusers where unique_id='$user_id'";
     
     $exe = mysqli_query($con,$get_user);
@@ -114,7 +114,12 @@ $u_id = $udata['unique_id'];
         }
         header{
             position: relative;
-            background: white;
+            background: rgb(18,140,126);
+            color: rgb(243, 238, 234);
+        }
+
+        header a i{
+            color: rgb(236,229,221);
         }
         .chat-area header .details{
             position: absolute;
@@ -129,6 +134,10 @@ $u_id = $udata['unique_id'];
             overflow-y: auto;
             overflow:scroll;
             background: #f7f7f7;
+          background: url('chatback.png');
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
             padding: 19px 30px 20px 30px;
             box-shadow: inset 0 32px 32px -32px rgb(0 0 0 /5%),inset 0 32px 32px -32px rgb(0 0 0 /5%) ;
         }
@@ -153,7 +162,9 @@ $u_id = $udata['unique_id'];
         }
         .outgoing .details p{
             background: #333;
-            color: #fff;
+            background:rgb(220,248,198);
+            color: rgb(0, 0, 0);
+          
             border-radius: 19px 19px 0 19px;
             font-size: small;
         }
@@ -176,8 +187,8 @@ $u_id = $udata['unique_id'];
             margin-left: 6px;
         }
         .incoming .details p{
-            color: #333;
-            background:#fff;
+            color: #000000;
+            background:rgb(255, 255, 255);
             border-radius: 17px 17px 17px 0px;
         }
 
@@ -185,10 +196,12 @@ $u_id = $udata['unique_id'];
             padding: 18px 30px;
             display: flex;
             justify-content: space-between;
+            
         }
 
         .typing-area{
             box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+            background:rgb(18,140,126);
         }
         .typing-area input{
             height: 45px;
@@ -199,6 +212,7 @@ $u_id = $udata['unique_id'];
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
             outline: none;
+            background: rgb(233, 243, 226);
         }
 
 
@@ -206,8 +220,8 @@ $u_id = $udata['unique_id'];
             width: 55px;
             border: none;
             outline:none;
-            background: #333;
-            color: #fff;
+            background: white;
+            color: rgb(122, 121, 119);
             font-size: 19px;
            
             border-radius: 0px 5px 5px 0px;
@@ -229,6 +243,7 @@ $u_id = $udata['unique_id'];
             /* align-items: center; */
             /* justify-content: center; */
             background-color: rgba(255, 255, 255, 0.399);
+            background: rgb(18,140,126);
         }
         .wrappers{
             background: rgba(248, 248, 248, 0.447);
@@ -246,6 +261,7 @@ $u_id = $udata['unique_id'];
              */
             padding-top: 7px;
             
+            
         }
         .chat-area header .details{
             position: absolute;
@@ -256,7 +272,7 @@ $u_id = $udata['unique_id'];
         .chat-box{
             height:calc(100vh - 170px);
             overflow-y: auto;
-            background: #f7f7f7;
+            /* background: #f7f7f7; */
             padding: 19px 30px 20px 30px;
             box-shadow: inset 0 32px 32px -32px rgb(0 0 0 /5%),inset 0 32px 32px -32px rgb(0 0 0 /5%) ;
         }
@@ -275,36 +291,36 @@ $u_id = $udata['unique_id'];
            
            </header>
            <!-- <hr> -->
-           <div class="chat-box">
+           <div class="chat-box" id="chat-box">
 
            <?php 
-           $get_msgs = "SELECT * FROM messages where (in_msg_id='$user_id' and out_msg_id='$u_id') or (in_msg_id='$u_id' and out_msg_id='$user_id')";
+        //    $get_msgs = "SELECT * FROM messages where (in_msg_id='$user_id' and out_msg_id='$u_id') or (in_msg_id='$u_id' and out_msg_id='$user_id')";
 
-           $msgs_exe = mysqli_query($con,$get_msgs);
+        //    $msgs_exe = mysqli_query($con,$get_msgs);
 
-           while($row=mysqli_fetch_assoc($msgs_exe))
-           {
+        //    while($row=mysqli_fetch_assoc($msgs_exe))
+        //    {
 
-            if($row['out_msg_id']==$u_id)
-            {
-                echo "<div class='chat outgoing'>
-                <div class='details'>
-                    <p>
-                    {$row['msg']}
-                    </p>
-                </div>
-            </div>";
-            }
-            else{
-                echo "<div class='chat incoming'>
-                <img src='users/{$user_image}' >
-                <div class='details'>
-                    <p>{$row['msg']}</p>
-                </div>
-            </div>";
-            }
+        //     if($row['out_msg_id']==$u_id)
+        //     {
+        //         echo "<div class='chat outgoing'>
+        //         <div class='details'>
+        //             <p>
+        //             {$row['msg']}
+        //             </p>
+        //         </div>
+        //     </div>";
+        //     }
+        //     else{
+        //         echo "<div class='chat incoming'>
+        //         <img src='users/{$user_image}' >
+        //         <div class='details'>
+        //             <p>{$row['msg']}</p>
+        //         </div>
+        //     </div>";
+        //     }
            
-           }
+        //    }
            ?>
             
            </div>
@@ -328,6 +344,41 @@ $u_id = $udata['unique_id'];
     const chatBox = document.querySelector('.chat-box');
    
     chatBox.scrollTop = chatBox.scrollHeight;
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const dynamicContent = document.getElementById("chat-box");
+
+    // Function to update content
+    function updateContent() {
+        // Create an XMLHttpRequest object
+        const xhr = new XMLHttpRequest();
+
+        // Define the request type, URL, and whether it should be asynchronous
+        xhr.open("GET", "fetchdata.php", true);
+
+        // Set up a callback function to handle the response
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Parse the response (assuming it's JSON)
+                dynamicContent.innerHTML = xhr.responseText;
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+               
+            }
+        };
+
+        // Send the request
+        xhr.send();
+    }
+
+    // Call the function immediately to load content on page load
+    updateContent();
+
+    // Use setInterval to periodically update the content (e.g., every 5 seconds)
+    setInterval(updateContent, 3000); // 5000 milliseconds (5 seconds)
+});
+
    
 </script>
 </body>
