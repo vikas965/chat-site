@@ -79,18 +79,19 @@ if(isset($_POST['submit'])){
         }
 
         .form-container {
-            width: 280px;
-            height: 420px;
+            width: 340px;
+            height: 530px;
           
           
             position: relative;
-            /* top: 25%;
-            left: 40%;
-            right: 25%;
-            bottom: 25%; */
-            background:white;
-            border-radius: 5px;
-            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+            border-radius: 2%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: cursive;
+            border: solid 1px lightslategray;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
 
         .heading {
@@ -100,11 +101,18 @@ if(isset($_POST['submit'])){
         }
 
         input {
-            margin-left: 7px;
             margin-bottom: 2px;
             border: none;
+            border-bottom: solid 1px black;
             outline: none;
             background:none;
+            width: 270px;
+            padding-bottom: 7px;
+            padding-left: 6px;
+            font-size: 19px;
+            font-family: cursive;
+            border-radius: 3px;
+          
 
         }
 
@@ -170,32 +178,66 @@ if(isset($_POST['submit'])){
         h5{
             color:blue;
         }
+
+
+        @media screen and (max-width:480px) {
+
+
+            .form-container{
+                width: 100vw;
+                background:transparent ;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                row-gap: 4px;
+                border: none;
+                box-shadow: none;
+            }
+
+            .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            row-gap: 40px;
+
+        }
+        }
+        .matter h5{
+            color:black;
+
+        }
+
+        #file{
+            background: transparent;
+        }
         </style>
         <div class="container">
             <div class="form-container">
                 <form id="form" method="post" autocomplete="off" enctype="multipart/form-data">
                     <div class="heading">
-                        <h2>Sign Up</h2>
+                        <h2>Register</h2>
                     </div>
-                    <div class="line1"></div>
+                    
 
                     <div class="details">
 
                         <div class="inputs">
                             <input id="username" name="username" placeholder="Enter Username" type="text" required>
-                            <div class="line"></div>
+                            
 
                         </div>
                         <div class="inputs">
                             <input  name="email" placeholder="Enter your email" type="email" required>
-                            <div class="line"></div>
+                            
 
                         </div>
                         <label for="" >Upload  Picture</label>
                         <div class="inputs">
                             
-                            <input name="pic" type="file"  required>
-                            <div class="line"></div>
+                            <input id="file" name="pic" type="file"  required>
+                            
 
                         </div>
 
@@ -207,13 +249,13 @@ if(isset($_POST['submit'])){
                         <div class="inputs">
                             <input id="password" name="password" placeholder="Set Your Password" type="password"
                                 required>
-                            <div class="line"></div>
+                            
 
                         </div>
                         <div class="inputs">
                             <input id="cpassword" name="cpassword" placeholder="Confirm Your Password" type="password"
                                 required>
-                            <div class="line"></div>
+                            
 
                         </div>
 
