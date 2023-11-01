@@ -63,41 +63,63 @@ if(isset($_POST['submit'])){
             height: 100vh;
             background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
 
         }
 
+
+
         .form-container {
-            width: 280px;
-            height: 250px;
+            width: 340px;
+            height: 490px;
             /* padding:25px; */
-            background-color: rgba(255, 255, 255, 0.92);
-            background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-            background:white;
+            background: transparent;
             position: relative;
             /* top: 25%;
             left: 40%;
             right: 25%;
             bottom: 25%; */
 
-            border-radius: 4%;
-            box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+            border-radius: 2%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: cursive;
+            border: solid 1px lightslategray;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+            
+            
         }
 
         .heading {
             padding-top: 10px;
             padding-left: 100px;
-            font-family: 'Arial Narrow Bold', sans-serif;
+            
         }
 
         input {
-            margin-left: 7px;
+            /* margin-left: 7px; */
             margin-bottom: 2px;
             border: none;
+            border-bottom: solid 1px black;
             outline: none;
             background:none;
+            width: 270px;
+            padding-bottom: 7px;
+            padding-left: 6px;
+            font-size: 19px;
+            font-family: cursive;
+            border-radius: 3px;
+           
 
+        }
+
+        input:focus{
+            background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
         }
 
         .line1 {
@@ -121,7 +143,7 @@ if(isset($_POST['submit'])){
 
         .details {
             margin-top: 20px;
-            margin-left: 15px;
+            /* margin-left: 15px; */
         }
 
         .inputs {
@@ -129,30 +151,29 @@ if(isset($_POST['submit'])){
             margin-bottom: 20px;
         }
 
-        .button {
-            margin-left: 35px;
-            margin-top: 10px;
-            color: #fff;
+       
 
+        #head{
+            z-index: 9;
+            position: relative;
+            top: 50px;
+            font-family: cursive;
+            
         }
-
-        .button input {
-            background: black;
-            width: 140px;
-            height: 30px;
-            border: none;
-            border-radius: 20px;
-            outline: none;
-            cursor: pointer;
-            transition: ease-in 0.3s;
-        }
+        
 
         
 
         .matter {
             color: rgba(0, 0, 0, 0.702);
-            margin-left: 45px;
+            /* margin-left: 45px; */
             margin-top: 20px;
+        }
+
+        .matter a{
+            color: black;
+            margin-left: 20px;
+            font-size: 17px;
         }
         label{
             color: rgba(0, 0, 0, 0.623);
@@ -162,7 +183,7 @@ if(isset($_POST['submit'])){
        
 
         i{
-            color:#ccc;
+            color:black;
             position:absolute;
             right:50px;
             cursor:pointer;
@@ -172,22 +193,74 @@ if(isset($_POST['submit'])){
             content: "\f070";
 
         }
+
+
+        #but{
+            border: solid 1px black;
+            border-radius: 9px;
+            padding: 10px;
+            background: black;
+            color: white;
+            font-size: 19px;
+
+        }
+
+
+        @media screen and (max-width:480px) {
+
+            .form-container{
+                width: 100vw;
+                background:transparent ;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                border: none;
+                box-shadow: none;
+                row-gap: 60px;
+            }
+
+            .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            row-gap: 40px;
+
+        }
+.inputs{
+    font-size: 18px;
+}
+
+#head{
+    
+    font-family: cursive;
+            font-size: 27px;
+            margin-top: 50px;
+            margin-bottom: 30px;
+           
+}
+        }
         </style>
+        
         <div class="container">
+       <center>
+       <h2 id="head" >Log In....</h2>
+       </center>
+                        
+                    
             <div class="form-container">
-                <form id="form" method="post" autocomplete="off">
-                    <div class="heading">
-                        <h2>Sign In</h2>
-                    </div>
-                    <div class="line1"></div>
+                <form id="form" method="post" >
+                    
+                    
 
                     <div class="details">
 
-                    <div class="inputs">
-                            <input  name="email" placeholder="Enter your email" type="email" required>
-                            <div class="line"></div>
+                  
+                            <input  name="email" placeholder="Enter Your Email" type="email" required>
+                            
 
-                        </div>
+                       
                        
 
                         <!-- <div class="inputs">
@@ -196,20 +269,20 @@ if(isset($_POST['submit'])){
                         </div> -->
 
                         <div class="inputs">
-                            <input id="password" name="password" placeholder="Set Your Password" type="password"
+                            <input id="password" name="password" placeholder="Enter Password" type="password"
                                 required>
                             <i class="fas fa-eye"></i>
-                            <div class="line"></div>
+                        
 
                         </div>
                         
 
                     </div>
                     <div class="button">
-                        <input name="submit" type="submit" class="button" value="Signin">
+                        <input name="submit" type="submit" id="but" value="Login">
                     </div>
                     <div class="matter">
-                        <h5>Not yet signed up!! <a href="user_signup.php">  >>Signup here</a></h5>
+                        <h5>Not yet signed up!! <a href="user_signup.php">  Signup here</a></h5>
                     </div>
                 </form>
             </div>
